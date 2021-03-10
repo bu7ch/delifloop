@@ -1,8 +1,8 @@
 import { Alert, FlatList, Platform, BackHandler, Scrollview,StyleSheet, Text, View  } from "react-native";
 import {Picker} from '@react-native-picker/picker';
 import { Toast, Root } from 'native-base'
-import { StackNavigator } from 'react-navigation'
-import Constants from ' expo-constants'
+import { createStackNavigator } from '@react-navigation/stack';
+import Constants from 'expo-constants'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { Component } from 'react';
 import CustomTextInput from "../compoenents/CustomTextInput";
@@ -98,14 +98,14 @@ class AddScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name = '',
-      cuisine = '',
-      price = '',
-      rating = '',
-      phone = '',
-      address = '',
-      website = '',
-      delivery = '',
+      name : '',
+      cuisine : '',
+      price : '',
+      rating : '',
+      phone : '',
+      address : '',
+      website : '',
+      delivery : '',
       key: `r_${new Date().getTime()}`
     };
   }
@@ -239,14 +239,17 @@ class AddScreen extends Component {
   
 }
 
-const RestaurantsScreen = StackNavigator({
-  ListScreen: { screen: ListScreen },
-  AddScreen: { screen: AddScreen}
-},
-{
-  headerMode: "none",
-  initialRouteName: "ListScreen"
-})
+const Stack = createStackNavigator();
+const RestaurantsScreen =
+  <Stack.Navigator>
+      <Stack.Screen name="ListScreen" component={ListScreen} />
+      <Stack.Screen name="AddScreen" component={AddScreen} />
+  </Stack.Navigator>
+
+// {
+//   headerMode: "none",
+//   initialRouteName: "ListScreen"
+// })
 
 const styles = StyleSheet.create({
   listScreenContainer:{
@@ -324,4 +327,4 @@ const styles = StyleSheet.create({
 })
 
 
-exports.RestaurantsScreen = RestaurantsScreen;
+export { RestaurantsScreen }

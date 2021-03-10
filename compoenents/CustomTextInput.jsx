@@ -1,5 +1,4 @@
 import { Text, TextInput, StyleSheet, View, Platform } from "react-native";
-import React from "react";
 
 import React, { Component } from "react";
 
